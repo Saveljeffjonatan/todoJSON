@@ -1,4 +1,4 @@
-.<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,35 +10,23 @@
 </head>
 <body>
 
-  <div id="addTodo" class="container">
-    <h1>Add a todo</h1>
-
-    <form id="regForm">
-
-      <div class="row">
-        <div class="form-goup col-md-12 mb-3">
-          <input type="text" id="title" class="form-control" placeholder="Title">
-          <div class="invalid-feedback">
-            You need to put a title on your todo.
-          </div>
-        </div>
-
-        <div class="form-goup col-md-12 mb-3">
-          <input type="text" id="todoText" class="form-control" placeholder="Please enter your todo">
-          <div class="invalid-feedback">
-            You need to type in a todo.
-          </div>
-        </div>
+<div class="wrapper">
+  <header>Todo app</header>
+    <form id="todoForm">
+      <div class="inputField" placeholder="Add your new todo">
+        <input id="todoInput" type="text" placeholder="Add your new todo">
+        <button><i class="fas fa-plus"></i></button>
       </div>
-
-        <button class="btn" onClick="pushTodo()">Add todo</button>
-
     </form>
-  </div>
 
-  <div id="output" class="container">
-
+  <ul id="todoList">
+    <!-- Data comes from API -->
+  </ul>
+  <div class="footer">
+    <span class="bold">You have <span class="pendingNumb"></span> pending tasks</span>
+    <button>Clear</button>
   </div>
+</div>
 
 
 
