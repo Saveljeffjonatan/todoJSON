@@ -18,7 +18,7 @@ completed   :     bolean
 
 
 
-  ✅  Det ska även skrivas ut en text som talar om för användaren vad som blivit fel om ingen text har skrivits in.
+  ✅    Det ska även skrivas ut en text som talar om för användaren vad som blivit fel om ingen text har skrivits in.
 
 
  För väl godkänt ska du göra följande:
@@ -30,11 +30,11 @@ completed   :     bolean
 
 
 
-  ❌  Om en todo är klarmarkerad så ska det gå att plocka bort den från listan, men det ska inte gå om den inte är klar.
+  ✅    Om en todo är klarmarkerad så ska det gå att plocka bort den från listan, men det ska inte gå om den inte är klar.
 
 
 
-  ✅   Du ska även begränsa hämtningen av antal todos när sidan laddas till 10 stycken.
+  ✅    Du ska även begränsa hämtningen av antal todos när sidan laddas till 10 stycken.
 
 
 loopa över alla divar och ta ut dem divar som har completed: true och spara id't för dem divarna i en Array.

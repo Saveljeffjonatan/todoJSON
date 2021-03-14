@@ -12,19 +12,19 @@
 
 <div class="wrapper">
   <header>Todo app</header>
-    <form id="todoForm">
+    <div id="todoForm">
       <div class="inputField" placeholder="Add your new todo">
         <input id="todoInput" type="text" placeholder="Add your new todo">
-        <button><i class="fas fa-plus"></i></button>
+        <button onclick="createNewTodo()"><i class="fas fa-plus"></i></button>
       </div>
-    </form>
+    </div>
 
-  <ul id="todoList">
+  <ul id="todoList" reversed>
     <!-- Data comes from API -->
   </ul>
   <div class="footer">
     <span class="bold">You have <span class="pendingNumb"></span> pending tasks</span>
-    <button>Clear</button>
+    <button onclick="clearTodos()">Clear</button>
   </div>
 </div>
 

@@ -13,26 +13,23 @@ const fetchTodos = () => {
     .then(data => {
       todos = data;
 
-      listTodos();
+      renderTodos();
       checkTodoStatus();
     })
 }
 fetchTodos();
 
-const listTodos = () => {
+const renderTodos = () => {
   output.innerHTML = '';
-    todos.forEach(post => { //* Lists each array index as a separate post with different styling
+  todos.forEach(post => { //* Lists each array index as a separate post with different styling
 
-/*
-  Displays a fullsize box or small box depending on how many characters
-  there is + adds styling if the post is already completed or not.
-*/
+
   if(post.completed === true){
     let html =
     `
     <div id=${post.id} ${post.completed} class="post">
     <li><h3 class="textEdit">${post.title.slice(0, 50)}</h3></li>
-    <button class="far fa-check-square"></button>
+    <button onclick="toggleTodo(${post.id})" class="far fa-check-square"></button>
     </div>
     `
     output.innerHTML += html;
@@ -41,7 +38,7 @@ const listTodos = () => {
     `
     <div id=${post.id} ${post.completed} class="post">
     <li><h3>${post.title.slice(0, 50)}</h3></li>
-    <button class="far fa-square"></button>
+    <button onclick="toggleTodo(${post.id})" class="far fa-square"></button>
     </div>
     `
     output.innerHTML += html;
@@ -65,15 +62,12 @@ const createTodo = (title) => {
   })
   .then(res => res.json())
   .then(data => {
-    console.log(data)
-
-    let newTodo = {
+    const newTodo = {
       ...data,
-      id: Date.now().toString()
+      id: todos.length + 1
     }
-    console.log(newTodo);
-    todos.unshift(newTodo);
-    listTodos();
+    todos.unshift(newTodo)
+    renderTodos();
   })
 }
 
@@ -86,23 +80,22 @@ inputBox.onkeyup = () => {
   }
 }
 
-output.addEventListener('click', e => {
-  const checkBox = e.target
-  const check = e.target.parentNode.querySelector('h3')
+/* This function finds the ID of the todo item and changes it
+to the completed status that it currently doesn't have. */
+const toggleTodo = (id) => {
+  const currentTodo = todos.find(item => item.id === id)
+  currentTodo.completed = !currentTodo.completed
+  renderTodos()
+}
 
-  if(checkBox.classList.contains('fa-square')){
-    checkBox.classList.remove('fa-square')
-    checkBox.classList.add('fa-check-square')
-    check.classList.add('textEdit')
-  }else if(checkBox.classList.contains('fa-check-square')){
-    checkBox.classList.remove('fa-check-square')
-    check.classList.remove('textEdit')
-    checkBox.classList.add('fa-square')
-  }
-})
+const clearTodos = () => {
+  const newTodos = todos.filter(({ completed }) => Boolean(!completed))
+  todos = newTodos
+  renderTodos()
+}
 
 const checkTodoStatus = () => {
-  const hasCompletedTrue = [...output.children].find(item => item.children[1].classList.contains('fa-check-square'))
+  const hasCompletedTrue = todos.find(({completed}) => Boolean(completed))
   if(hasCompletedTrue){
     deleteAllBtn.classList.add('active')
   }else {
@@ -110,12 +103,8 @@ const checkTodoStatus = () => {
   }
 }
 
-addEventListener('click', () => checkTodoStatus())
-
-form.addEventListener('submit', e => {
-  e.preventDefault();
-
-  createTodo(input.value);
-  form.reset();
-  addBtn.classList.remove('active')
-})
+const createNewTodo = () => {
+    createTodo(input.value);
+    input.value = ''
+    addBtn.classList.remove('active')
+}
